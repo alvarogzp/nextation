@@ -1,0 +1,21 @@
+#!/bin/sh
+
+PROJECT_SETTINGS_FILE="../ProjectSettings/ProjectSettings.asset"
+
+set_project_setting()
+{
+    name="$1"
+    value="$2"
+    replace_project_setting "^\(  ${name}: \).*\$" "\1${value}"
+}
+
+replace_project_setting()
+{
+    match="$1"
+    replace="$2"
+    echo "Modifying ProjectSettings:" >&2
+    echo " -$(grep "$match" "$PROJECT_SETTINGS_FILE")" >&2
+    new_settings_content="$(sed "s/${match}/${replace}/" "$PROJECT_SETTINGS_FILE")"
+    echo "$new_settings_content" > "$PROJECT_SETTINGS_FILE"
+    echo " +$(grep "$match" "$PROJECT_SETTINGS_FILE")" >&2
+}

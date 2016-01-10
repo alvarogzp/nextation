@@ -1,0 +1,38 @@
+#!/bin/sh
+
+BASE_DIR="$(dirname "$0")"
+cd "$BASE_DIR"
+LIB_DIR="lib"
+. "$LIB_DIR/replace-settings"
+
+set_version_string()
+{
+    new_version="$1"
+    set_project_setting "bundleVersion" "$new_version"
+}
+
+set_version_code()
+{
+    new_version_code="$1"
+    set_project_setting "AndroidBundleVersionCode" "$new_version_code"
+}
+
+convert_version_string_to_version_code()
+{
+    version_string="$1"
+    version_code="$(echo "$version_string" | sed 's/\.//g')"
+    while [ "$(echo -n "$version_code" | wc -c)" -lt 4 ]
+    do
+        version_code="${version_code}0"
+    done
+    echo "$version_code"
+}
+
+version="${1:?Please specify new version string}"
+version_code="$(convert_version_string_to_version_code "$version")"
+
+set_version_string "$version"
+set_version_code "$version_code"
+
+echo
+echo "Set version to $version (version code: $version_code)"

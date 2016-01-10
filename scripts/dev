@@ -1,0 +1,15 @@
+#! /bin/sh
+
+BASE_DIR="$(dirname "$0")"
+cd "$BASE_DIR"
+LIB_DIR="lib"
+. "$LIB_DIR/replace-settings"
+
+set_project_setting "productName" "NEXTATION dev"
+set_project_setting "bundleIdentifier" "com.FYASoftware.MetroGame.dev"
+set_project_setting "AndroidTargetDevice" "3"
+set_project_setting "AndroidKeyaliasName" ""
+
+# Apply reversed deploy patch
+cd ..
+git apply --reverse --verbose patches/deploy.patch

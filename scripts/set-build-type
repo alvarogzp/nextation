@@ -1,0 +1,43 @@
+#!/bin/sh
+
+BASE_DIR="$(dirname "$0")"
+cd "$BASE_DIR"
+LIB_DIR="lib"
+. "$LIB_DIR/replace-settings"
+
+set_build_type()
+{
+    build_type="$1"
+    set_project_setting "AndroidTargetDevice" "$build_type"
+}
+
+set_version_code()
+{
+    last_number="$1"
+    replace_project_setting "^\(  AndroidBundleVersionCode: [0-9]\{3\}\)[0-9]\$" "\1${last_number}"
+}
+
+type="$1"
+
+if [ "$type" = "arm" ]
+then
+    version_code=0
+    build_type=3
+elif [ "$type" = "x86" ]
+then
+    version_code=1
+    build_type=4
+elif [ "$type" = "fat" ]
+then
+    version_code=2
+    build_type=0
+else
+    echo "Please specify a valid build type: arm, x86 or fat"
+    exit 1
+fi
+
+set_build_type $build_type
+set_version_code $version_code
+
+echo
+echo "Build type set to $type"

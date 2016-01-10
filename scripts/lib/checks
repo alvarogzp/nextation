@@ -1,0 +1,11 @@
+#!/bin/sh
+
+check_clean_repo()
+{
+    git status | grep "^nothing to commit, working directory clean\$" > /dev/null
+    if [ $? != 0 ]
+    then
+        echo "Error: Please, clean the repo and try again"
+        exit 1
+    fi
+}

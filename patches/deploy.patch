@@ -1,0 +1,10 @@
+diff --git a/Metro Game/Assets/Scripts/Settings/GameSettings.cs b/Metro Game/Assets/Scripts/Settings/GameSettings.cs
+index 9478485..72affcc 100644
+--- a/Metro Game/Assets/Scripts/Settings/GameSettings.cs	
++++ b/Metro Game/Assets/Scripts/Settings/GameSettings.cs	
+@@ -1,4 +1,4 @@
+ public class GameSettings
+ {
+-	public const bool DEVELOPMENT_MODE = true;
++	public const bool DEVELOPMENT_MODE = false;
+ }

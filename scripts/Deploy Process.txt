@@ -1,0 +1,9 @@
+Start release branch (git flow release start vX.X)
+Publish release branch (git flow release publish v)
+Switch to deploy settings (scripts/deploy)
+Update version (scripts/update-version)
+Compile for each architecture (scripts/set-build-type) and publish to Google Play
+Publish release branch (git push)
+Close release branch (git flow release finish v)
+Switch to dev settings (scripts/dev)
+Push everything (git push --all && git push --tags)

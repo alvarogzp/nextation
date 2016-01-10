@@ -1,0 +1,18 @@
+#! /bin/sh
+
+BASE_DIR="$(dirname "$0")"
+cd "$BASE_DIR"
+LIB_DIR="lib"
+. "$LIB_DIR/replace-settings"
+
+set_project_setting "productName" "NEXTATION"
+set_project_setting "bundleIdentifier" "com.FYASoftware.MetroGame"
+set_project_setting "AndroidTargetDevice" "0"
+set_project_setting "AndroidKeyaliasName" "metro game"
+
+# Apply deploy patch
+cd ..
+git apply --verbose patches/deploy.patch
+
+echo
+echo "Please, don't forget to update version number"
