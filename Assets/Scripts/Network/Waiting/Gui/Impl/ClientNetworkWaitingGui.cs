@@ -28,7 +28,8 @@ public class ClientNetworkWaitingGui : AbstractNetworkWaitingGui
 		string[] servers = network.GetServers();
 		buttons = new GuiButtonRendererControl[servers.Length];
 		for (int i = 0; i < servers.Length; i++) {
-			buttons[i] = new GuiButtonRendererControl(() => network.Connect(i));
+			int index = i; // store the current value of "i", so that it is not affected by subsequent increments
+			buttons[i] = new GuiButtonRendererControl(() => network.Connect(index));
 			addServer(servers[i], buttons[i]);
 		}
 	}
